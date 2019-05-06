@@ -37,10 +37,13 @@ echo "${BUILD_ZIP}"
 
 if [ ! -z "$BUILD_ZIP" ] ; then
     echo "Creating ZIP file: ${MOD_DIR_NAME}.zip"
+    rm -f "tmp/${MOD_DIR_NAME}.zip"
     zip -r "tmp/${MOD_DIR_NAME}.zip" "${MOD_DIR_NAME}"
+    rm -f "/target/${MOD_DIR_NAME}.zip"
     cp -f "tmp/${MOD_DIR_NAME}.zip" "/target/${MOD_DIR_NAME}.zip"
 else
-    echo "Creating mod directory: ${MOD_DIR_NAME}"
+    echo "Overwriting mod directory: ${MOD_DIR_NAME}"
+    rm -rf "${MOD_DIR_NAME}/*"
     cp -R "${MOD_DIR_NAME}" /target
 fi
 
