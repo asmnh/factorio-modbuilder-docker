@@ -16,7 +16,7 @@ if [ -f tmp/info.override.json ] ; then
     mv tmp/info.override.json tmp/info.json
 else
     # Build infofile
-    python create_infofile.py
+    python3 create_infofile.py
     cat cleanup_list | while read fn ; 
     do
         rm -f "tmp/${fn}"
@@ -33,9 +33,14 @@ MOD_DIR_NAME="${MOD_NAME}_${MOD_VERSION}"
 mkdir "${MOD_DIR_NAME}"
 cp -R tmp/. "${MOD_DIR_NAME}/"
 
+echo "${BUILD_ZIP}"
+
 if [ ! -z "$BUILD_ZIP" ] ; then
-    zip "/target/${MOD_DIR_NAME}.zip" "${MOD_DIR_NAME}"
+    echo "Creating ZIP file: ${MOD_DIR_NAME}.zip"
+    zip -r "tmp/${MOD_DIR_NAME}.zip" "${MOD_DIR_NAME}"
+    cp -f "tmp/${MOD_DIR_NAME}.zip" "/target/${MOD_DIR_NAME}.zip"
 else
+    echo "Creating mod directory: ${MOD_DIR_NAME}"
     cp -R "${MOD_DIR_NAME}" /target
 fi
 
