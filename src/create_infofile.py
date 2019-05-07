@@ -52,6 +52,7 @@ info = {
     'homepage': getval('HOMEPAGE', ''),
     'factorio_version': factorio_version,
     'dependencies': load_dependencies(),
+    'license': getval('LICENSE', default='MIT'),
     'description': getval('DESCRPIPTION', filename='description.txt', default='')
 }
 
