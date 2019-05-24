@@ -36,7 +36,8 @@ print(f'Building infofile for {mod_name}:{mod_version}')
 def load_dependencies():
     def yield_dependencies():
         with open(os.path.join(basepath, 'dependencies.txt'), 'rt') as f:
-            yield f
+            for line in f:
+                yield line
     try:
         return [clearstring(dep) for dep in yield_dependencies()]
     except FileNotFoundError:
